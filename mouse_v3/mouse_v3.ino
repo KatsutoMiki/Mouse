@@ -5,6 +5,7 @@ int sensorValue[3];
 float sensorVolt[3];
 float sensorMatrix[3][3] = {{0.17708176,1.7415297,-1.5397313},{-2.2040002,0.96467626,0.91498053},{2.5543857,0.6693835,1.831656}};
 float force[3];
+int mousePressed = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -36,10 +37,21 @@ void loop() {
   Serial.print(",");
   Serial.println(force[2]);
 
+  if (force[0] > 0.2 | force[0] < -0.2 | force[1] > 0.2 | force[1] < -0.2){
+    Mouse.move(force[0]*10,force[1]*-10,0);
+  } else if (force[2] > 0.7 && mousePressed == 0){
+    Mouse.press();
+    mousePressed = Mouse.isPressed();
+  } else if (force[2] < 0.7 && mousePressed == 1){
+    Mouse.release();
+    mousePressed = Mouse.isPressed();
+  }
+
 //  Serial.print(sensorVolt[0]);
 //  Serial.print(",");
 //  Serial.print(sensorVolt[1]);
 //  Serial.print(",");
 //  Serial.println(sensorVolt[2]);
+  delay(1);
 
 }
