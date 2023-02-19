@@ -1,10 +1,10 @@
 #include "Mouse.h"
 
-int firstRead[3];
-int sensorValue[3];
-float sensorVolt[3];
+int firstRead[3] = {0,0,0};
+int sensorValue[3] = {0,0,0};
+float sensorVolt[3] = {0,0,0};
 float sensorMatrix[3][3] = {{0.17708176,1.7415297,-1.5397313},{-2.2040002,0.96467626,0.91498053},{2.5543857,0.6693835,1.831656}};
-float force[3];
+float force[3] = {0,0,0};
 int mousePressed = 0;
 
 void setup() {
@@ -39,10 +39,10 @@ void loop() {
 
   if (force[0] > 0.2 | force[0] < -0.2 | force[1] > 0.2 | force[1] < -0.2){
     Mouse.move(force[0]*10,force[1]*-10,0);
-  } else if (force[2] > 0.7 && mousePressed == 0){
+  } else if (force[2] > 1.2 && mousePressed == 0){
     Mouse.press();
     mousePressed = Mouse.isPressed();
-  } else if (force[2] < 0.7 && mousePressed == 1){
+  } else if (force[2] < 1.2 && mousePressed == 1){
     Mouse.release();
     mousePressed = Mouse.isPressed();
   }
@@ -53,5 +53,5 @@ void loop() {
 //  Serial.print(",");
 //  Serial.println(sensorVolt[2]);
   delay(1);
-
+  
 }
