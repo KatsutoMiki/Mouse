@@ -18,6 +18,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  Serial.print(analogRead(A0));
+  Serial.print(",");
+  Serial.print(analogRead(A1));
+  Serial.print(",");
+  Serial.println(analogRead(A2));
 
   sensorValue[0] = analogRead(A0) - firstRead[0];
   sensorValue[1] = analogRead(A1) - firstRead[1];
@@ -37,20 +42,14 @@ void loop() {
   Serial.print(",");
   Serial.println(force[2]);
 
-  if (abs(force[0]) > 0.1 | abs(force[1]) > 0.1) {
-    Mouse.move(force[0] * 10, force[1] * -10, 0);
-  } else if (force[2] > 0.7 && mousePressed == 0) {
+  if (abs(force[0]) > 0.13 | abs(force[1]) > 0.13) {
+    Mouse.move(force[1] * 15, force[0] * -15, 0);
+  } else if (force[2] > 0.6 && mousePressed == 0) {
     Mouse.press();
     mousePressed = Mouse.isPressed();
-  } else if (force[2] < 0.7 && mousePressed == 1) {
+  } else if (force[2] < 0.6 && mousePressed == 1) {
     Mouse.release();
     mousePressed = Mouse.isPressed();
   }
-
-  //  Serial.print(sensorVolt[0]);
-  //  Serial.print(",");
-  //  Serial.print(sensorVolt[1]);
-  //  Serial.print(",");
-  //  Serial.println(sensorVolt[2]);
   delay(1);
 }

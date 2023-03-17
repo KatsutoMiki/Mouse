@@ -3,7 +3,7 @@
 int firstRead[3] = { 0, 0, 0 };
 int sensorValue[3] = { 0, 0, 0 };
 float sensorVolt[3] = { 0, 0, 0 };
-float sensorMatrix[3][3] = { { 0.17708176, 1.7415297, -1.5397313 }, { -2.2040002, 0.96467626, 0.91498053 }, { 2.5543857, 0.6693835, 1.831656 } };
+float sensorMatrix[3][3] = { { 0.0052307, 1.7122012, -1.6475401 }, { -2.3800125, 0.9766598, 0.94305617 }, { 1.281938, 1.7168304, 2.245703 } };
 float force[3] = { 0, 0, 0 };
 int mousePressed = 0;
 
@@ -38,7 +38,7 @@ void loop() {
   Serial.println(force[2]);
 
   if (abs(force[0]) > 0.1 | abs(force[1]) > 0.1) {
-    Mouse.move(force[0] * 10, force[1] * -10, 0);
+    Mouse.move(force[1] * 10, force[0] * -10, 0);
   } else if (force[2] > 0.7 && mousePressed == 0) {
     Mouse.press();
     mousePressed = Mouse.isPressed();
@@ -47,10 +47,10 @@ void loop() {
     mousePressed = Mouse.isPressed();
   }
 
-  //  Serial.print(sensorVolt[0]);
-  //  Serial.print(",");
-  //  Serial.print(sensorVolt[1]);
-  //  Serial.print(",");
-  //  Serial.println(sensorVolt[2]);
+  // Serial.print(sensorVolt[0]);
+  // Serial.print(",");
+  // Serial.print(sensorVolt[1]);
+  // Serial.print(",");
+  // Serial.println(sensorVolt[2]);
   delay(1);
 }
